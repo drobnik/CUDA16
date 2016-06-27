@@ -3,9 +3,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <vector>
-#include<iterator>
-//#include "PNG.h"
-#include "p.h"
+#include <iterator>
+#include "png.h"
 
 __global__ void copy(const unsigned char* in, unsigned char* out, int contrFactor) {
 	int x = blockIdx.x;
@@ -45,39 +44,6 @@ __global__ void copy(const unsigned char* in, unsigned char* out, int contrFacto
 	out[index + 1] = (char)g; //G
 	out[index + 2] = (char)b; //B
 	out[index + 3] = in[index + 3]; //A
-	/*
-	float helper = 259 * (contrFactor + 255) / (255 * (259 - contrFactor));
-	float factor = helper * (contrFactor - 128) + 128;
-
-	float R = truncf(factor * in[index]);
-	if (R > 255) {
-		R = 255;
-	}
-	else if (R < 0) {
-		R = 0;
-	}
-
-	float G = factor * in[index + 1];
-	if (G > 255) {
-		G = 255;
-	}
-	else if (G < 0) {
-		G = 0;
-	}
-
-	float B = truncf(factor * in[index + 3]);
-	if (B > 255) {
-		B = 255;
-	}
-	else if (B < 0) {
-		B = 0;
-	}
-	//copy each color channel
-	out[index] = R;//in[index]; //R
-	out[index + 1] = G;//in[index + 1]; //G
-	out[index + 2] = B;// in[index + 2]; //B
-	out[index + 3] = R;//in[index + 3]; //A
-	*/
 }
 char fooround(float x) {
 	if (x > 255) {
