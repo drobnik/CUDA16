@@ -5,61 +5,17 @@
 #include <vector>
 #include <iterator>
 #include "png.h"
+#include "kernel_header.cuh"
 
-__global__ void copy(const unsigned char* in, unsigned char* out, int contrFactor) {
-	int x = blockIdx.x;
-	int y = threadIdx.x;
+float contrFactor;
 
-	int width = blockDim.x;
-	int index = (x + y * width) * 4;
-
-
-	float r = truncf(2.5*(in[index] - 128) + 128);
-	float g = truncf(2.5*(in[index + 1] - 128) + 128);
-	float b = truncf(2.5*(in[index + 2] - 128) + 128);
-
-	
-	if (r > 255) {
-		r = 255;
-	}
-	else if (r < 0) {
-		r = 0;
-	}
-
-	if (g > 255) {
-		g = 255;
-	}
-	else if (g < 0) {
-		g = 0;
-	}
-
-	if (b > 255) {
-		b = 255;
-	}
-	else if (b < 0) {
-		b = 0;
-	}
-
-	out[index] = (char) r; //R
-	out[index + 1] = (char)g; //G
-	out[index + 2] = (char)b; //B
-	out[index + 3] = in[index + 3]; //A
-}
-char fooround(float x) {
-	if (x > 255) {
-		return 255;
-	}
-	else if (x < 0) {
-		return 0;
-	}
-	else {
-		return (char)truncf(x);
-	}
+extern "C"
+void contrastChange(PNG in, int picSize) {
 
 }
 
 int main(int arg, char* args[]) {
-	int contrFactor = 10;
+	contrFactor = 0.5;
 	PNG inPng("Lenna.png");
 	PNG outPng;
 	outPng.Create(inPng.w, inPng.h);
