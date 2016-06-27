@@ -44,7 +44,7 @@ PNG contrastChange(PNG input, int size, unsigned int width,
 
 		exit(1);
 	} else if(cudaStatus == cudaSuccess){
-		std::cout << "An image has been processed.\n";
+		std::cout << "An image has been processed.\n\n";
 	}
 
 	cudaStatus = cudaDeviceSynchronize();
