@@ -15,7 +15,7 @@ char roundPix(float x) {
 	}
 }
 
-__global__ void copy(const unsigned char* in, unsigned char* out, float factor) {
+__global__ void contrast(const unsigned char* in, unsigned char* out, float factor) {
 	int x = blockIdx.x;
 	int y = threadIdx.x;
 
