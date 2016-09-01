@@ -16,7 +16,6 @@ int main(int arg, char* args[]) {
 	cudaError_t cudaStatus;
 	std::string inputPath = "lena.png";
 	std::string outputPath = "after_lena.png";
-	factor = 1.3;
 
 	std::cout << "Enter contrast factor \n";
 	std::cout << "Factor: ";
